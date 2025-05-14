@@ -1,24 +1,4 @@
 # Simple Chess Game in Python
-class Piece:
-    def __init__(self, name, color):
-        self.name = name
-        self.color = color
-        self.symbol = self.get_symbol()
-
-    def get_symbol(self):
-        symbols = {
-            'K': '♔' if self.color == 'W' else '♚',
-            'Q': '♕' if self.color == 'W' else '♛',
-            'R': '♖' if self.color == 'W' else '♜',
-            'B': '♗' if self.color == 'W' else '♝',
-            'N': '♘' if self.color == 'W' else '♞',
-            'P': '♙' if self.color == 'W' else '♟'
-        }
-        return symbols[self.name]
-
-    def __str__(self):
-        return self.symbol
-
 
 class ChessGame:
     def __init__(self):
