@@ -75,8 +75,3 @@ class ChessGame:
                 self.move(start, end)
             except:
                 print("Invalid input. Try again.")
-
-
-if __name__ == "__main__":
-    game = ChessGame()
-    game.play()
