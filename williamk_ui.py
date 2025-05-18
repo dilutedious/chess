@@ -28,18 +28,18 @@ def coordinates_to_algebra(coordinates):
     return file + rank
 
 def display_board(board_object):
-    print("   a b c d e f g h\n    - - - - - - - -")
-    for row in range(0,7):
+    print("    a b c d e f g h\n    - - - - - - - -")
+    for row in range(0,8):
         line_printed = str(8 - row) + " |" # row label counts down from 8 to 1
-        for col in range(0,7):
-            piece = board_object.get_piece(row, col)
+        for col in range(0,8):
+            piece = board_object.get_piece((row, col))
             if piece == None:
-                if (row + col) % 2 == 0: line_printed += "■" # checks if white or black square by certain diagonals only
-                else: line_printed += "□"
+                if (row + col) % 2 == 0: line_printed += " ■" # checks if white or black square by certain diagonals only
+                else: line_printed += " □"
             else:
-                line_printed += str(piece.show())
-        print(line_printed + "| " + str(8 - row))
-    print("   - - - - - - - -\n    a b c d e f g h")
+                line_printed += " " + str(piece.show())
+        print(line_printed + " | " + str(8 - row))
+    print("    - - - - - - - -\n    a b c d e f g h")
 
 def get_user_move():
     input_move = input("Enter your move: (e.g. 'e2 e4')")
@@ -54,3 +54,5 @@ def parse_move(user_move):
             return start_algebraic, end_algebraic
     return None
 
+def message(message):
+    print(message)

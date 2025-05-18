@@ -76,7 +76,7 @@ class Rook(Piece):
 class Knight(Piece):
     def __init__(self, colour):
         symbol = "♞♘"
-        super.__init__(colour, symbol)
+        super().__init__(colour, symbol)
 
     def validate_move(self, start_pos, end_pos, board_object):
         start_row, start_col = start_pos
