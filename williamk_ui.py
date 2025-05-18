@@ -1,1 +1,3 @@
 # user interface
+
+print(NotImplementedError)
