@@ -95,82 +95,82 @@ class Knight(Piece):
     
     # bishop piece
 
-    class Bishop(Piece):
-        def __init__(self, colour):
-            symbol = "♝♗"
-            super().__init__(colour, symbol)
+class Bishop(Piece):
+    def __init__(self, colour):
+        symbol = "♝♗"
+        super().__init__(colour, symbol)
 
-        def validate_move(self, start_pos, end_pos, board_object):
-            start_row, start_col = start_pos
-            end_row, end_col = end_pos
+    def validate_move(self, start_pos, end_pos, board_object):
+        start_row, start_col = start_pos
+        end_row, end_col = end_pos
 
-            # direction doesn't matter for bishop.
+        # direction doesn't matter for bishop.
 
-            row_diff = abs(end_row - start_row)
-            col_diff = abs(end_col - start_col)
+        row_diff = abs(end_row - start_row)
+        col_diff = abs(end_col - start_col)
 
-            # check if move is diagonal; height = length if diagonal.
+        # check if move is diagonal; height = length if diagonal.
 
-            if row_diff != col_diff:
-                return False 
-            
-            if not board_object.path_clear(start_pos, end_pos, "diagonal"):
-                return False
-            
-            if board_object.emptytile(end_pos) or board_object.is_opp_piece(end_pos):
-                return True
-            
+        if row_diff != col_diff:
+            return False 
+        
+        if not board_object.path_clear(start_pos, end_pos, "diagonal"):
             return False
+        
+        if board_object.emptytile(end_pos) or board_object.is_opp_piece(end_pos):
+            return True
+        
+        return False
 
-    # queen piece
+# queen piece
 
-    class Queen(Piece):
-        def __init__(self, colour):
-            symbol = "♛♕"
-            super().__init__(colour, symbol)
+class Queen(Piece):
+    def __init__(self, colour):
+        symbol = "♛♕"
+        super().__init__(colour, symbol)
 
-        def validate_move(self, start_pos, end_pos, board_object):
-            start_row, start_col = start_pos
-            end_row, end_col = end_pos
-            is_straight = start_row is end_row or start_col is end_col
-            is_diagonal = abs(start_col - end_col) is abs(start_row - end_row)
+    def validate_move(self, start_pos, end_pos, board_object):
+        start_row, start_col = start_pos
+        end_row, end_col = end_pos
+        is_straight = start_row is end_row or start_col is end_col
+        is_diagonal = abs(start_col - end_col) is abs(start_row - end_row)
 
-            if not (is_straight or is_diagonal):
-                return False
-            
-            if is_straight:
-                path_type = "horizontal/vertical"
-            elif is_diagonal:
-                path_type = "vertical"
+        if not (is_straight or is_diagonal):
+            return False
+        
+        if is_straight:
+            path_type = "horizontal/vertical"
+        elif is_diagonal:
+            path_type = "vertical"
 
-            if not board_object.path_clear(start_pos, end_pos, path_type):
-                return False
-            
+        if not board_object.path_clear(start_pos, end_pos, path_type):
+            return False
+        
+        if board_object.emptytile(end_pos) or board_object.is_opp_piece(end_pos, self.colour):
+            return True
+        
+        return False
+
+# King piece
+
+class King(Piece):
+    def __init__(self, colour):
+        symbol = "♚♔"
+        super().__init__(colour, symbol)
+
+    def validate_move(self, start_pos, end_pos, board_object):
+        start_row, start_col = start_pos
+        end_row, end_col = end_pos
+        
+        # using absolute value - direction doesn't matter for king
+
+        row_diff = abs(end_row - start_row)
+        col_diff = abs(end_col - start_col)
+
+        # checkmate/check not implemented yet... king captured is sufficient enough.
+
+        if row_diff <= 1 and col_diff <= 1 and not (row_diff == 0 and col_diff == 0):
             if board_object.emptytile(end_pos) or board_object.is_opp_piece(end_pos, self.colour):
                 return True
             
-            return False
-
-    # King piece
-
-    class King(Piece):
-        def __init__(self, colour):
-            symbol = "♚♔"
-            super().__init__(colour, symbol)
-
-        def validate_move(self, start_pos, end_pos, board_object):
-            start_row, start_col = start_pos
-            end_row, end_col = end_pos
-            
-            # using absolute value - direction doesn't matter for king
-
-            row_diff = abs(end_row - start_row)
-            col_diff = abs(end_col - start_col)
-
-            # checkmate/check not implemented yet... king captured is sufficient enough.
-
-            if row_diff <= 1 and col_diff <= 1 and not (row_diff == 0 and col_diff == 0):
-                if board_object.emptytile(end_pos) or board_object.is_opp_piece(end_pos, self.colour):
-                    return True
-                
-            return False
+        return False
