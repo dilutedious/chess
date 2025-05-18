@@ -128,7 +128,7 @@ class Board:
     def get_king_pos(self, colour):
         for row in range(0,7):
             for col in range(0,7):
-                piece = self.get_piece(row, col):
+                piece = self.get_piece(row, col)
                 if piece.show() == "♚" and colour == 'w':
                     return (row, col)
                 elif piece.show() == "♔" and colour == 'b':
