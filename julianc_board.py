@@ -66,7 +66,7 @@ class Board:
 
         return captured_piece
     
-    def is_on_board(self, pos):
+    def validboardpos(self, pos):
         row, col = pos
         if 0 <= row < 8 and 0 <= col < 8:
             return True
@@ -105,9 +105,35 @@ class Board:
                 for row in range((start_col + step), (end_row - step)):
                     if not self.emptytile(row, start_col):
                         return False
+        
         elif path_type == "diagonal":
-            return NotImplementedError
-        # got up to here, fixing soon
+            if end_row > start_row:
+                row_step = 1
+            else:
+                row_step = -1
+            if end_col > start_col:
+                col_step = 1
+            else:
+                col_step = -1
+            current_row, current_col = start_row + row_step, start_col + col_step
+
+            while (current_row, current_col) != end_pos:
+                if not self.emptytile():
+                    return False
+                current_row += row_step
+                current_col += col_step
+
+            return True
+
+    def get_king_pos(self, colour):
+        for row in range(0,7):
+            for col in range(0,7):
+                piece = self.get_piece(row, col):
+                if piece.show() == "♚" and colour == 'w':
+                    return (row, col)
+                elif piece.show() == "♔" and colour == 'b':
+                    return (row, col)
+        return None
 
 board = Board()
 board.setup()
