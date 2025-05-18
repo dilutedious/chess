@@ -14,7 +14,7 @@ class Board:
         self.grid[0][0] = Rook('b')
         self.grid[0][7] = Rook('b')
         self.grid[7][0] = Rook('w')
-        self.grid[7][7] = Rook('w')
+        self.grid[7][7] = Rook('w') 
 
         # knight setup
 
@@ -42,7 +42,7 @@ class Board:
 
         # pawn setup
 
-        for col in range(0,7):
+        for col in range(0,8):
             self.grid[1][col] = Pawn('b')
             self.grid[6][col] = Pawn('w')
 

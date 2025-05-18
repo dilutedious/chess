@@ -7,7 +7,7 @@ from williamk_ui import algebra_to_coordinates, coordinates_to_algebra, display_
 class Game:
     def __init__(self):
         self.board = Board()
-        self.current_player_colour = "white"
+        self.current_player_colour = "w"
         self.gameover = False
     
     def switch_player(self):
@@ -45,7 +45,7 @@ class Game:
                 elif piece_moved.colour != self.current_player_colour: #checks for your colour
                     message("Not your colour! Pick one of your own pieces.")
                     continue
-                elif piece_moved.validate_move(start_coords, end_coords, self.board):
+                elif not piece_moved.validate_move(start_coords, end_coords, self.board):
                     message("Invalid move for that piece. Make sure you know how the pieces move.")
                     continue
                 else:

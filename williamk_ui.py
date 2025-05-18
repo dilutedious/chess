@@ -6,7 +6,7 @@
 
 def algebra_to_coordinates(algebra_str):
     letters = "abcdefgh" # used to find index in string
-    numbers = "12345678"
+    numbers = "87654321"
     if len(algebra_str) != 2: return None # can put things on the same line for simplicity
     file = algebra_str[0].lower()
     rank = algebra_str[1]
@@ -21,7 +21,7 @@ def algebra_to_coordinates(algebra_str):
 
 def coordinates_to_algebra(coordinates):
     letters = "abcdefgh" # used to find index in string
-    numbers = "12345678"
+    numbers = "87654321"
     row, col = coordinates
     file = letters[col]
     rank = numbers[row]
