@@ -32,13 +32,13 @@ class Board:
 
         # queen setup
 
-        self.grid[0][4] = Queen('b')
-        self.grid[7][4] = Queen('w')
+        self.grid[0][3] = Queen('b')
+        self.grid[7][3] = Queen('w')
     
-        # queen setup
+        # king setup
 
-        self.grid[0][3] = King('b')
-        self.grid[7][3] = King('w')
+        self.grid[0][4] = King('b')
+        self.grid[7][4] = King('w')
 
         # pawn setup
 
