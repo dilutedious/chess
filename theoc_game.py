@@ -26,7 +26,11 @@ class Game:
             while not valid_input:
                 move_input = get_user_move()
                 
-                start_algebra, end_algebra = parse_move(move_input)
+                parsed = parse_move(move_input)
+                if parsed == None:
+                    message("Invalid input format! Please use 'xn xn' format (e.g. e1 e2)")
+                    continue
+                start_algebra, end_algebra = parsed
                 if start_algebra == None or end_algebra == None: # validation at each step
                     message("Invalid input format! Please use 'xn xn' format (e.g. e1 e2)")
                     continue
@@ -50,7 +54,7 @@ class Game:
                     continue
                 else:
                     captured_piece = self.board.get_piece(end_coords)
-                    if captured_piece != None and captured_piece.colour != self.current_player_colour:
+                    if captured_piece != None and captured_piece.colour == self.current_player_colour:
                         message("Cannot capture your own piece!")
                         continue
                     else:
@@ -60,8 +64,8 @@ class Game:
             self.board.move_piece(start_coords, end_coords) # note: double move for pawn's first not implemented yet
             
             if captured_piece != None:
-                message(f"{piece_moved} captures {captured_piece}!")
-            
+                message(f"{piece_moved.show()} captures {captured_piece.show()}!")
+
                 if captured_piece.symbol == "♚♔":
                     display_board(self.board)
                     message(f"Game over! {self.current_player_colour.upper()} wins!")
@@ -69,12 +73,9 @@ class Game:
                     break
             
             if not self.gameover:
-                self.switch_player
+                self.switch_player()
 
 # run the code:
 
 chessgame = Game()
 chessgame.run_game()
-            
-
-                

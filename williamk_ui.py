@@ -46,13 +46,16 @@ def get_user_move():
     return input_move.strip().lower() # makes it interpretable for the program
 
 def parse_move(user_move):
-    parsed = user_move.split()
-    if len(parsed) == 2: # validation step 1
-        start_algebraic = parsed[0]
-        end_algebraic = parsed[1]
-        if len(start_algebraic) == 2 and len(end_algebraic) == 2: # validation step 2
-            return start_algebraic, end_algebraic
-    return None
+    try:
+        parsed = user_move.split()
+        if len(parsed) == 2: # validation step 1
+            start_algebraic = parsed[0]
+            end_algebraic = parsed[1]
+            if len(start_algebraic) == 2 and len(end_algebraic) == 2: # validation step 2
+                return start_algebraic, end_algebraic
+        return None
+    except:
+        return None
 
 def message(message):
     print(message)

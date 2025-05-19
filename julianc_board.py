@@ -89,22 +89,19 @@ class Board:
 
         if path_type == "horizontal/vertical":
             if start_row == end_row: # for horizontal moves
-                if end_col > start_col:
-                    step = 1
-                else:
-                    step = -1
-                for column in range((start_col + step), (end_col) - step):
+                if end_col > start_col: step = 1
+                else: step = -1
+                for column in range((start_col + step), end_col, step):
                     # checking for clear squares
-                    if not self.emptytile(start_row, column):
+                    if not self.emptytile((start_row, column)):
                         return False
             else: # for vertical moves
-                if end_row > start_row:
-                    step = 1
-                else:
-                    step = -1
-                for row in range((start_col + step), (end_row - step)):
-                    if not self.emptytile(row, start_col):
+                if end_row > start_row: step = 1
+                else: step = -1
+                for row in range((start_row + step), end_row, step):
+                    if not self.emptytile((row, start_col)):
                         return False
+            return True
         
         elif path_type == "diagonal":
             if end_row > start_row:
@@ -118,7 +115,7 @@ class Board:
             current_row, current_col = start_row + row_step, start_col + col_step
 
             while (current_row, current_col) != end_pos:
-                if not self.emptytile():
+                if not self.emptytile((current_row, current_col)):
                     return False
                 current_row += row_step
                 current_col += col_step

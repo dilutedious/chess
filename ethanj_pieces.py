@@ -88,7 +88,7 @@ class Knight(Piece):
         col_diff = abs(end_col - start_col)
 
         if (row_diff == 1 and col_diff == 2) or (row_diff == 2 and col_diff == 1):
-            if board_object.emptytile(end_pos) or board_object.is_opp_piece(end_pos):
+            if board_object.emptytile(end_pos) or board_object.is_opp_piece(end_pos, self.colour):
                 return True
             
         return False
@@ -117,7 +117,7 @@ class Bishop(Piece):
         if not board_object.path_clear(start_pos, end_pos, "diagonal"):
             return False
         
-        if board_object.emptytile(end_pos) or board_object.is_opp_piece(end_pos):
+        if board_object.emptytile(end_pos) or board_object.is_opp_piece(end_pos, self.colour):
             return True
         
         return False
@@ -132,8 +132,8 @@ class Queen(Piece):
     def validate_move(self, start_pos, end_pos, board_object):
         start_row, start_col = start_pos
         end_row, end_col = end_pos
-        is_straight = start_row is end_row or start_col is end_col
-        is_diagonal = abs(start_col - end_col) is abs(start_row - end_row)
+        is_straight = start_row == end_row or start_col == end_col
+        is_diagonal = abs(start_col - end_col) == abs(start_row - end_row)
 
         if not (is_straight or is_diagonal):
             return False
@@ -141,7 +141,7 @@ class Queen(Piece):
         if is_straight:
             path_type = "horizontal/vertical"
         elif is_diagonal:
-            path_type = "vertical"
+            path_type = "diagonal"
 
         if not board_object.path_clear(start_pos, end_pos, path_type):
             return False
